@@ -1,0 +1,28 @@
+3Sum = arr[i] + 2Sum
+
+Code:
+
+class Solution:
+    def threeSum(self, arr: List[int]) -> List[List[int]]:
+        if len(arr) < 3:
+            return []
+        arr.sort()
+        lis = []
+        for i in range(len(arr)-2):
+            j = i+1
+            k = len(arr)-1
+
+            while j < k:
+                s = arr[i] + arr[j] + arr[k]
+                if s == 0:
+                    lis.append((arr[i],arr[j],arr[k]))
+                    j = j +1
+                    k = k-1
+
+                if s > 0:
+                    k = k-1
+                    
+                if s < 0: 
+                    j = j+1
+                    
+        return set(lis)  # to avoid duplicates
