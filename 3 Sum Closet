@@ -1,0 +1,65 @@
+Leetcode: https://leetcode.com/problems/3sum-closest/
+
+Explanation: http://www.goodtecher.com/leetcode-16-3sum-closest/
+
+Code:  # We need to return the closet sum to the target
+
+# This is follow up question of 3 SUM
+
+___________________________________________________________________________________________________________________________________
+class Solution:
+    def threeSumClosest(self, arr: List[int], target: int) -> int:
+        if len(arr) < 3:   # Base case 1 
+            return -1
+        
+        if len(arr) == 3:   # Base case 2
+            return sum(arr)
+        
+        arr.sort()   # Necessary for two pointers when one is at right and other starts from left.
+
+        min_sum = arr[0]+arr[1]+arr[2]  # initilize random sum but elements should be from the array
+        
+        for i in range(len(arr)):  # Code of 3 sum prob
+            j = i+1   # left pointer
+            k = len(arr)-1  # right pointer
+
+            while j < k:   # two pointer 
+            
+                s = arr[i]+arr[j]+arr[k]   
+                
+                if s ==  target:   # when there is simple match
+                    return target
+                    break   
+                else:
+
+                    if abs(s-target) < abs(min_sum-target):   # calculate the distance between the current sum with the target sum
+                        min_sum = s                           # and try to minimize it. whenever we get a smaller one we update min_sum
+
+                if s > target:    # classic two pointer search statergy since array is sorted 
+                    k = k-1
+
+                if s < target:
+                    j = j +1
+        return min_sum    # return the smallest sum closet to target
+___________________________________________________________________________________________________________________________________
+        
+# If we has to print the arrays instead of giving the sum then :
+
+lis = []
+for i in range(len(arr)-2):
+    j = i+1
+    k = len(arr)-1
+
+    while j < k:
+        s = arr[i]+arr[j]+arr[k]
+
+        if s == min_sum:
+            lis.append((arr[i],arr[j],arr[k]))
+
+        if s > target:
+            k = k-1
+
+        if s < target:
+            j = j +1
+
+print(lis)
