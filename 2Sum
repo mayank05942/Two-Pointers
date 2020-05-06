@@ -1,0 +1,71 @@
+2Sum:
+-------
+
+Method 1: Without Sorting Two pointers ---> Will give TLE
+
+Below code will give TLE:
+
+class Solution:
+    def twoSum(self, arr: List[int], target: int) -> List[int]:
+        if arr is None or len(arr) < 2:
+            return []
+        for i in range(len(arr)):
+            j = i+1
+            while j < len(arr):
+                num = target - arr[i]
+                
+                if arr[j] == num:
+                    return [i,j]
+                    break  
+                else:
+                    j += 1
+                    
+______________________________________________________________________________________                   
+Method 2 - Two Pointers with sort (BEST):
+
+class Solution:
+    def twoSum(self, arr: List[int], target: int) -> List[int]:
+        temp = arr[:]  # since we are sorting the array hence we need a backup of original array
+        
+        if not arr or len(arr) < 2:
+            return []
+        
+        arr.sort()
+        
+        left = 0
+        right = len(arr)-1
+        lis = []
+        while left < right:
+            s = arr[left]+ arr[right]
+            if s == target:
+                
+                break # as soon as we get numbers which satisfy the constraint we will break
+                
+                
+            if s > target:
+                right -= 1
+                
+            if s < target:
+                left += 1
+                
+        res = []
+        
+        for k in range(len(temp)):  # iterate over the original unsorted array
+            if temp[k] in (arr[left],arr[right]):   find which element satisfy the constraints
+                res.append(k)
+        return res
+      
+________________________________________________________________________________________
+Another solution: O(n)  solution is:
+
+class Solution:
+    def twoSum(self, arr: List[int], target: int) -> List[int]:
+        if arr is None or len(arr) < 2:
+            return []
+        for i in range(len(arr)):
+            num = target - arr[i]
+
+            if num in arr:
+                idx = arr.index(num)
+                if idx != i:
+                    return [i,idx]
