@@ -1,9 +1,9 @@
-Prob:
+Prob:https://leetcode.com/problems/sum-of-square-numbers/
 
 Since the search space of two numbers is sorted hence both binary search and two pointers can be used here.
 
-Two Pointer Algo:
-
+Method 1 - Two Pointer Algo:
+____________________________________________________________________________________________________________________________
 class Solution:
     def judgeSquareSum(self, num: int) -> bool:
         import math
@@ -24,4 +24,37 @@ class Solution:
             if s < num:
                 i += 1
         return False
+        
+  __________________________________________________________________________________________________________________________________
+  
+  Method - Binary Search
+  
+  class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        
+        def binary_search(start,end,k):
+            while start <= end:
+                mid = start + (end-start)//2
+                
+                if mid**2 == k:
+                    return True
+                elif mid**2 > k:
+                    end = mid-1
+                else:
+                    start = mid+1
+            return False
+                
+        
+      
+      
+        import math
+        boom = int(math.sqrt(c))
+        for a in range(boom+1):
+            b = c - a**2
+            if binary_search(0,b,b):
+                return True
+                
+        return False
+        
+        
         
