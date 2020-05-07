@@ -1,0 +1,31 @@
+Prob: https://leetcode.com/problems/boats-to-save-people/
+
+Explanation: https://www.youtube.com/watch?v=4aBtEz8MrDw&t=214s
+
+
+
+Code:
+
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        
+        people.sort()
+        i = 0
+        j = len(people)-1
+        
+        count = 0
+        while i <= j:
+            s = people[i]+people[j] 
+
+            # This is the case in which we can include two persons in a boat
+            
+            if s <= limit: # we will include heaviest and lightest person in the boat
+                count += 1  # one boat
+                i += 1   # since we have include one lighest person move ahead
+                j -= 1   # again we gave included one heaviest persopn move below
+                
+            # if we cannot include two person we will include the heaviest one
+            else:
+                count += 1  # counting heaviest in
+                j -= 1 # move below one
+        return count
