@@ -8,7 +8,8 @@ class Solution:
     def judgeSquareSum(self, num: int) -> bool:
         import math
         i = 0
-        j = int(math.sqrt(num))  # both the numbers cannot be greater than sqrt(num)
+        j = int(math.sqrt(num))   # i^2 + j^2 = num --> when i = 0 then j^2 = num ----> j = sqrt(num)
+                                  # that's why j is sqrt(num)
 
         while i <= j:
             s = i**2 + j**2
