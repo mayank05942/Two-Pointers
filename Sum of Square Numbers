@@ -1,0 +1,26 @@
+Prob:
+
+Since the search space of two numbers is sorted hence both binary search and two pointers can be used here.
+
+Two Pointer Algo:
+
+class Solution:
+    def judgeSquareSum(self, num: int) -> bool:
+        import math
+        i = 0
+        j = int(math.sqrt(num))  # both the numbers cannot be greater than sqrt(num)
+
+        while i <= j:
+            s = i**2 + j**2
+
+            if s == num:
+                return True
+                break
+
+            if s > num:
+                j -= 1
+
+            if s < num:
+                i += 1
+        return False
+        
