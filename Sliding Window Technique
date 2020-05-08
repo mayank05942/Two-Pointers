@@ -60,3 +60,29 @@ for i in range(1,len(arr)):
 
 print(global_max)
 ___________________________________________________________________________________________________________________________________________
+
+Approach 2 - Sliding Window:
+
+class Solution:
+    def maxSubArray(self, arr: List[int]) -> int:
+        if len(arr) == 1:
+            return arr[0]
+        from sys import maxsize
+        global_sum = 0
+        for i in range(len(arr)):
+
+            j = i
+            local_sum = 0
+            while j < len(arr):  # i defines start point of window and j defines the end point of window
+                local_sum += arr[j]
+                if local_sum < 0:
+                    break
+                else:
+                    j += 1
+                    global_sum = max(local_sum,global_sum)
+                    
+        if global_sum == 0:  # Handle the case when all numbers are neagtive
+            return max(arr)
+        else:
+            return global_sum
+       
