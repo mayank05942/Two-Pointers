@@ -2,7 +2,13 @@ Based on Sliding Window Prob:  ---> size of the window changes dynamically
 
 Prob: https://leetcode.com/problems/minimum-size-subarray-sum/
 
+Explanaiton: https://www.youtube.com/watch?v=MK-NZ4hN7rs
+
+
+-------------------------------------------------------------------------------------------
 Code:
+____________________________________________________________________________________________
+
 import sys
 from sys import maxsize
 s = 280
@@ -21,3 +27,4 @@ for end in range(len(nums)):  # increasing the size of the window
         start += 1   # since this is the best we can do with the start idx we will change it now
 
 print(min_len)
+_____________________________________________________________________________________________________
