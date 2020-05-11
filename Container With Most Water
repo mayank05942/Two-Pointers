@@ -1,0 +1,47 @@
+Prob: https://leetcode.com/problems/container-with-most-water/
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Explanation: 
+=============
+
+Use Two pointers one from start and one from end
+
+We know that the amount of water inside the container is always defined by the smaller length otherwise it will be overfilled.
+
+Hence area = min(arr[left],arr[right]) * (right-left)  ---> area of rectangle
+
+Now the question is which pointer to move---> Left or right ??
+
+ Think is there any better boundaries or lines that can contain maximum water.
+ 
+ We have already the max width now only way to increase the area is to increase the height.
+ 
+ Move the pointer in the direction of the min of arr[left], arr[right].
+ 
+since the height is determined by the shorter end, you move the shorter end 
+in the hope of increasing the height of the rectangle.
+
+
+
+___________________________________________________________________________________________________________________________________-
+Code:
+
+class Solution:
+    def maxArea(self, arr: List[int]) -> int:
+        if len(arr) == 0:
+            return 0
+        res = 0
+        start = 0
+        end  = len(arr)-1
+        while start < end:
+            #print(start,end)
+            area = min(arr[start],arr[end])*(end-start)
+            res = max(res,area)
+            if arr[start] < arr[end]:   # move the shorter end to increase the height as width is constant
+                start += 1              # and the shorter end determine the height
+            else:                       # hence we wish to find max shorter end.
+                end -= 1
+
+
+        return res
