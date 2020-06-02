@@ -1,0 +1,46 @@
+Prob: https://www.geeksforgeeks.org/count-triplets-with-sum-smaller-that-a-given-value/
+______________________________________________________________________________________________________________________________
+
+Explanation:
+
+if sum >= target then we need to reduce it --> hence k = k -1
+if sum < target:  result = result + (k-j)
+
+Why (k-j) ?:
+once we found for a particular k we are getting sum < target then due to sorting all the possible values of k between
+(j+1 to k) will give the result < target hence we are including all of them.
+
+Ex:[5,1,3,4,7]
+sorted = [1,3,4,5,7]
+target = 12
+when arr[i] = 1,arr[j] = 3 and arr[k] is 7 we found sum < target
+ Hence for values of k between j+1 and k we will get sum < target:
+ (1,3,7)
+ (1,3,5)
+ (1,3,4)
+
+________________________________________________________________________________________________________________________________
+
+Code:
+------
+
+arr =[5,1,3,4,7]
+
+arr.sort()
+target = 12
+result = 0
+for i in range(len(arr)-2):
+    j = i+1
+    k = len(arr)-1
+
+    while j < k:
+        s = arr[i] + arr[j] +arr[k]
+
+        if s >= target:
+            k -= 1
+
+        if s < target:
+            result += (k-j)
+            j += 1
+
+print(result)
