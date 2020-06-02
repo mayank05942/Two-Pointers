@@ -1,6 +1,8 @@
 Leetcode: https://leetcode.com/problems/3sum-closest/
+____________________________________________________________________________________________________________________________________
 
 Explanation: http://www.goodtecher.com/leetcode-16-3sum-closest/
+_____________________________________________________________________________________________________________________________________
 
 Code:  # We need to return the closet sum to the target
 
@@ -63,3 +65,32 @@ for i in range(len(arr)-2):
             j = j +1
 
 print(lis)
+_____________________________________________________________________________________________________________________________________
+
+Other varaition:  Using 'inf'
+-----------------
+
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        closest = float('inf')
+        result = sum(nums[:3])
+        nums.sort() # n log n, in Python
+
+        for k in range(len(nums) - 2):
+            if k > 0 and nums[k] == nums[k-1]: continue # Skips duplicate
+            i = k + 1
+            j = len(nums) - 1
+
+            while i < j:
+                # Check closest 3 Sum
+                total = nums[k] + nums[i] + nums[j]
+                if abs(total - target) < closest:
+                    closest = abs(total - target)
+                    result = total
+
+                # Move i or j
+                if total < target:
+                    i += 1
+                else:
+                    j -= 1
+        return result
